@@ -1,0 +1,371 @@
+# EXPERIMENT NO. 4
+
+## AIM
+
+To integrate Jenkins with GitHub and simulate a Continuous Integration and Continuous Delivery (CI/CD) pipeline for the automated building and testing of a software project.
+
+## STEPS
+
+### Step 1: Check the Prerequisites
+
+Ensure that the following are available:
+
+1. A working GitHub account.
+2. A GitHub repository containing the project source code.
+3. Access to a running Jenkins instance.
+4. Java configured correctly for Jenkins.
+5. Git installed on the computer or Jenkins server as required.
+6. A working internet connection.
+7. A Jenkins account with permission to create and configure jobs.
+
+GitHub account:
+https://github.com/ezdevz7
+
+If you are using a college computer, check whether Jenkins is already running on a college server. If it is, use the server address and credentials provided by your instructor instead of installing another instance.
+
+### Step 2: Create a GitHub Repository
+
+1. Log in to GitHub using your account, `ezdevz7`.
+
+2. Click the plus (+) icon in the upper-right corner.
+
+3. Select New repository.
+
+4. Enter the repository name:
+
+   Jenkins-CICD-Demo
+
+5. Select Public or Private according to your preference.
+
+6. Add a README file if you want to initialize the repository through GitHub.
+
+7. Click Create repository.
+
+8. Open the repository and copy its HTTPS URL.
+
+Expected repository URL:
+
+https://github.com/ezdevz7/Jenkins-CICD-Demo.git
+
+Use the actual URL displayed by GitHub if it differs.
+
+### Step 3: Create a Sample Java Project
+
+1. Open VS Code.
+
+2. Create a folder named `Jenkins-CICD-Demo`.
+
+3. Inside the folder, create a file named `HelloWorld.java`.
+
+4. Add the following code:
+
+   public class HelloWorld {
+   public static void main(String[] args) {
+   System.out.println("Hello World from Jenkins CI/CD!");
+   }
+   }
+
+5. Save the file.
+
+### Step 4: Create a Build Script
+
+1. Inside the project folder, create a file named `build.bat`.
+
+2. Add the following commands:
+
+   @echo off
+   echo Starting the build process...
+   javac HelloWorld.java
+   if errorlevel 1 exit /b 1
+   echo Compilation successful.
+   java HelloWorld
+
+3. Save the file.
+
+The script compiles the Java program and executes it. If compilation fails, the script returns an error so Jenkins can mark the build as unsuccessful.
+
+Note: This example is intended for a Windows Jenkins agent. For a Linux agent, use a shell script instead.
+
+### Step 5: Add a Test Script
+
+1. In the same project folder, create a file named `test.bat`.
+
+2. Add the following commands:
+
+   @echo off
+   echo Running the test...
+   java HelloWorld | findstr /c:"Hello World from Jenkins CI/CD!"
+   if errorlevel 1 exit /b 1
+   echo Test passed successfully.
+
+3. Save the file.
+
+This basic test checks whether the program prints the expected message. It is a simple output-validation test rather than a complete unit-testing framework.
+
+### Step 6: Upload the Project to GitHub
+
+1. Open the terminal in VS Code.
+
+2. Navigate to the project folder.
+
+3. Initialize Git:
+
+   git init
+
+4. Configure your identity for this repository:
+
+   git config user.name "ezdevz7"
+
+   git config user.email "[destinymaker10@gmail.com](mailto:destinymaker10@gmail.com)"
+
+5. Stage the project files:
+
+   git add HelloWorld.java build.bat test.bat
+
+6. Commit the files:
+
+   git commit -m "Add Java CI/CD demo"
+
+7. Rename the branch:
+
+   git branch -M main
+
+8. Connect the GitHub repository:
+
+   git remote add origin https://github.com/ezdevz7/Jenkins-CICD-Demo.git
+
+9. Push the files:
+
+   git push -u origin main
+
+10. Complete GitHub authentication if prompted.
+
+11. Open your GitHub repository in the browser.
+
+12. Verify that the three files are present.
+
+If you initialized the GitHub repository with a README, follow the appropriate pull or merge procedure before pushing if Git reports unrelated or missing remote changes. Do not overwrite existing work unnecessarily.
+
+### Step 7: Log In to Jenkins
+
+1. Open your browser.
+
+2. Navigate to your Jenkins URL.
+
+   For a local installation, the common address is:
+
+   http://localhost:8080
+
+3. If Jenkins uses another port or is hosted on a college server, use the address provided by your instructor.
+
+4. Log in using your Jenkins account.
+
+5. Verify that the Jenkins dashboard opens.
+
+### Step 8: Install or Verify the Required Plugins
+
+1. Open Manage Jenkins.
+2. Select Plugins or the plugin-management section.
+3. Check whether the following plugins are installed, where applicable:
+
+   * Git plugin
+   * Pipeline plugin, if you intend to use a Pipeline job
+   * GitHub integration plugin, if required for your chosen webhook or integration method
+4. Install any required missing plugins if you have permission.
+5. Restart Jenkins if requested.
+
+A Freestyle job using Git checkout and Windows batch commands can demonstrate the basic integration without requiring a Jenkinsfile. A Pipeline job is useful when you want the build process defined as code.
+
+### Step 9: Create a Jenkins Freestyle Job
+
+1. Return to the Jenkins dashboard.
+
+2. Click New Item.
+
+3. Enter the job name:
+
+   Jenkins-CICD-Demo
+
+4. Select Freestyle project.
+
+5. Click OK.
+
+### Step 10: Connect Jenkins to GitHub
+
+1. Open the job configuration page.
+
+2. Locate Source Code Management.
+
+3. Select Git.
+
+4. Enter the repository URL:
+
+   https://github.com/ezdevz7/Jenkins-CICD-Demo.git
+
+5. Set the branch specification to:
+
+   */main
+
+6. If the repository is private, select credentials configured securely in Jenkins.
+
+7. If the repository is public, try accessing it without credentials.
+
+8. Save the configuration.
+
+Jenkins must have Git installed and access to the repository. If the repository cannot be cloned, inspect the job's console output and check the URL, credentials, network access, and branch name.
+
+### Step 11: Configure the Automated Build
+
+1. Open the job configuration.
+
+2. Locate Build Steps.
+
+3. Click Add build step.
+
+4. Select Execute Windows batch command.
+
+5. Enter:
+
+   call build.bat
+
+6. Add another build step.
+
+7. Select Execute Windows batch command again.
+
+8. Enter:
+
+   call test.bat
+
+9. Save the configuration.
+
+The first step compiles and executes the program. The second step checks whether the expected output is produced. If either step fails, Jenkins should report a failed build.
+
+### Step 12: Trigger the First Build
+
+1. Open the Jenkins-CICD-Demo job.
+
+2. Click Build Now.
+
+3. Wait for the build to finish.
+
+4. Open the latest build number.
+
+5. Click Console Output.
+
+6. Verify that the output includes:
+
+   Starting the build process...
+   Compilation successful.
+   Hello World from Jenkins CI/CD!
+   Running the test...
+   Test passed successfully.
+
+7. Verify that Jenkins reports a successful build.
+
+If the build fails, check whether the Java compiler is available to the Jenkins agent and whether the source files were checked out into the workspace.
+
+### Step 13: Enable Automatic Builds After GitHub Changes
+
+A build triggered by clicking Build Now is manual. To demonstrate automatic CI, configure a trigger.
+
+For a webhook-based approach:
+
+1. Open the Jenkins job configuration.
+
+2. Locate Build Triggers.
+
+3. Enable the GitHub webhook trigger option if it is available and supported by your Jenkins setup.
+
+4. Save the job.
+
+5. Open your GitHub repository.
+
+6. Navigate to Settings.
+
+7. Select Webhooks.
+
+8. Click Add webhook.
+
+9. Enter the webhook endpoint provided by your Jenkins configuration. A common Jenkins endpoint is:
+
+   https://YOUR-JENKINS-HOST/github-webhook/
+
+10. Select the appropriate content type and push-event delivery settings.
+
+11. Save the webhook.
+
+12. Ensure the Jenkins endpoint is reachable by GitHub over the network.
+
+Important: `localhost` is not accessible to GitHub's servers. A webhook will not work with a Jenkins address that is only available on your local computer. For a college practical, use an instructor-provided reachable Jenkins server or demonstrate a manual build if external webhook access is unavailable. Do not expose a college computer or Jenkins service to the public internet without authorization.
+
+### Step 14: Test the Automatic Build
+
+1. Open `HelloWorld.java` in VS Code.
+
+2. Change the output message to:
+
+   Hello World from Updated Jenkins CI/CD!
+
+3. Update the expected message in `test.bat` to match.
+
+4. Save both files.
+
+5. Stage the changes:
+
+   git add HelloWorld.java test.bat
+
+6. Commit the changes:
+
+   git commit -m "Update Hello World output and test"
+
+7. Push the changes:
+
+   git push
+
+8. If the webhook is correctly configured, open Jenkins and check whether a new build starts automatically.
+
+9. Open the latest build's Console Output.
+
+10. Verify that the updated message appears and the test passes.
+
+If automatic triggering is unavailable, click Build Now to verify that Jenkins can retrieve and build the latest GitHub commit. Clearly distinguish this manual test from a successful webhook-triggered build.
+
+### Step 15: Verify the CI/CD Workflow
+
+Confirm the following:
+
+1. The project is stored in GitHub.
+2. Jenkins is connected to the correct repository.
+3. Jenkins checks out the source code.
+4. The Java program compiles successfully.
+5. The test script executes successfully.
+6. The console log displays the expected output.
+7. Jenkins reports the correct build status.
+8. A new commit can trigger a new build when automatic triggering is configured.
+9. The latest source code is available in the Jenkins workspace.
+
+Note: This experiment demonstrates the Continuous Integration and automated build-and-test portions of a CI/CD workflow. It does not deploy an application to a production environment.
+
+## THEORY
+
+GitHub is a platform for hosting Git repositories and collaborating on software projects. Developers commit changes to a repository and push them to GitHub, where the source code can be accessed by other tools.
+
+Jenkins is an automation server used to build, test, and deploy software. It can retrieve source code from GitHub, execute build scripts, run tests, and display the results.
+
+Continuous Integration (CI) is the practice of frequently integrating code changes and validating them through automated builds and tests. It helps developers detect errors early.
+
+Continuous Delivery (CD) extends this process by preparing validated software for release. Continuous Deployment goes further by automatically releasing successful changes to a target environment.
+
+In this experiment, Jenkins retrieves a Java project from GitHub, compiles the source code, executes the program, and validates its output. A webhook can notify Jenkins when new code is pushed, allowing the job to run automatically.
+
+The workflow is:
+
+Developer Changes Code → Git Commit → GitHub Push → Jenkins Checkout → Build → Test → Build Status
+
+The Jenkins console output provides information about compilation, execution, test results, and errors. A successful build indicates that the configured steps completed without reporting failure.
+
+A webhook requires a reachable Jenkins endpoint. When Jenkins is running only on localhost, GitHub cannot directly send a webhook to it.
+
+## CONCLUSION
+
+Jenkins was integrated with a GitHub-hosted Java project to demonstrate an automated build-and-test workflow. The source code was committed to GitHub, retrieved by Jenkins, compiled, and executed. A basic output-validation test was performed, and the build results were checked through the Jenkins console. Where network access and webhook configuration are available, GitHub changes can trigger builds automatically. This experiment demonstrates the fundamentals of CI and the role of Jenkins and GitHub in software development automation.
