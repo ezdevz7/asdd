@@ -1,0 +1,342 @@
+EXPERIMENT NO. 1
+
+AIM
+
+To study and implement the Agile Software Project Lifecycle using Jira with DevOps pipeline integration.
+
+STEPS
+
+PART A: CREATE AN AGILE PROJECT IN JIRA
+
+Step 1: Log in to Jira
+
+1. Open a web browser on the college computer.
+2. Visit https://www.atlassian.com/software/jira
+3. Log in using your Atlassian account.
+4. Open Jira and navigate to the project management interface.
+
+Step 2: Create a New Project
+
+1. Navigate to the Projects section.
+2. Click Create Project.
+3. Select the Scrum template if available. Otherwise, select Kanban.
+4. Enter the project name as Student Task Management System.
+5. Set the project key to STMS if the option is available.
+6. Select the appropriate project type and access settings.
+7. Click Create to create the project.
+8. Open the newly created project.
+
+PART B: CONFIGURE THE PROJECT SUMMARY
+
+Step 3: Update Project Information
+
+1. Open the Summary or Overview section of the project.
+
+2. Review the project information and available progress indicators.
+
+3. Add the following project description if editing is supported:
+
+   "The Student Task Management System helps students organize academic tasks, manage deadlines, track progress, and collaborate on assignments."
+
+4. Save the description if required.
+
+5. Review the project overview to understand how Jira presents project information.
+
+PART C: CREATE AND MANAGE THE BACKLOG
+
+Step 4: Open the Backlog
+
+1. Navigate to the Backlog section of the project.
+2. Click Create Issue or the equivalent task-creation option.
+3. Select Task as the issue type if available.
+4. Enter the task name and description.
+5. Save the task.
+6. Repeat the process to create the following tasks:
+
+   Task 1: Requirement Analysis
+   Description: Identify the system requirements.
+
+   Task 2: UI Design
+   Description: Design the application's user interface.
+
+   Task 3: Database Design
+   Description: Plan the database tables and relationships.
+
+   Task 4: User Authentication
+   Description: Implement user login and authentication.
+
+   Task 5: Task Management
+   Description: Implement task creation, updating, and tracking.
+
+   Task 6: Testing
+   Description: Test the application and identify defects.
+
+   Task 7: Deployment
+   Description: Prepare the application for deployment.
+
+Step 5: Prioritize and Organize Tasks
+
+1. Open each task.
+2. Set its priority to High, Medium, or Low where available.
+3. Assign the task to yourself or an appropriate team member.
+4. Add due dates if the project supports them.
+5. Arrange tasks according to their importance and dependencies.
+6. Review the backlog to verify that all tasks have been created.
+
+Step 6: Plan a Sprint (Scrum Projects)
+
+1. Open the Backlog.
+2. Locate the Create Sprint option.
+3. Create a sprint named Sprint 1.
+4. Move relevant tasks from the backlog into the sprint.
+5. Select Start Sprint if you need to demonstrate sprint execution.
+6. Enter the sprint duration and sprint goal if requested.
+
+Example sprint goal:
+"Complete requirement analysis, initial UI design, and database planning."
+
+7. Start the sprint and verify that the selected tasks appear in the active sprint.
+
+Note: Sprint creation is applicable to Scrum projects. In Kanban, demonstrate continuous task flow instead.
+
+PART D: USE THE AGILE BOARD
+
+Step 7: Open and Review the Board
+
+1. Navigate to the Board section.
+2. Review the available workflow columns.
+3. Identify the columns representing the task lifecycle, such as:
+
+   * To Do
+   * In Progress
+   * Done
+4. If the columns differ, use the workflow configured for the project.
+
+Step 8: Update Task Status
+
+1. Select the Requirement Analysis task.
+2. Move it from To Do to In Progress using drag-and-drop or the available status control.
+3. Move the task to Done after marking the work as completed.
+4. Repeat the process with another task if necessary.
+5. Verify that the task's status changes correctly.
+
+Step 9: Track Project Progress
+
+1. Review the number and distribution of tasks across the workflow columns.
+2. Identify pending, active, and completed tasks.
+3. Verify that task movement is reflected in the project.
+4. If using Scrum, review the active sprint and its remaining work.
+
+PART E: USE THE LIST VIEW
+
+Step 10: Open the List View
+
+1. Navigate to the List section or List view available in the project.
+
+2. Verify that the created tasks appear in the list.
+
+3. Review available fields such as task name, status, priority, assignee, and due date.
+
+4. Select a task to inspect its details.
+
+5. Update its priority, assignee, or other editable fields if required.
+
+6. Save the changes.
+
+7. Verify that the updated information appears in the list.
+
+8. If a dedicated List view is unavailable, use the available issue list or equivalent task-management view.
+
+PART F: USE THE TIMELINE VIEW
+
+Step 11: Schedule Project Tasks
+
+1. Open the Timeline section of the project.
+2. Review the available scheduling features.
+3. Assign start dates and due dates to tasks where supported.
+4. Arrange the tasks according to the project schedule.
+5. Add dependencies between tasks if the available features support them.
+6. Review the resulting timeline.
+
+Example schedule:
+
+Requirement Analysis: Day 1–2
+UI Design: Day 3–4
+Database Design: Day 3–5
+User Authentication: Day 5–7
+Task Management: Day 6–9
+Testing: Day 10–11
+Deployment: Day 12
+
+7. Verify that the tasks appear on the timeline according to their scheduled dates.
+
+Note: The example uses relative days for planning. Enter actual calendar dates in Jira. Some timeline features depend on the project template, permissions, and subscription plan.
+
+PART G: ADD COLLABORATORS
+
+Step 12: Add Team Members
+
+1. Open the project settings or project access-management section.
+2. Locate the People, Members, or Access option.
+3. Select the option to add a team member.
+4. Enter the teammate's email address or select an existing account.
+5. Assign an appropriate project role or permission.
+6. Save the changes.
+7. Verify that the team member has been added or granted the intended access.
+
+Step 13: Verify Collaboration
+
+1. Open a project task.
+2. Assign it to an appropriate team member if permitted.
+3. Add a comment to the task if required.
+4. Verify that the task details and comments are visible to authorized project members.
+
+If you are working individually, you can use your own account to complete the practical and document the collaborator-addition procedure.
+
+PART H: INTEGRATE THE DEVOPS WORKFLOW
+
+Step 14: Create a GitHub Repository
+
+1. Open https://github.com and log in to your account.
+2. Click the option to create a new repository.
+3. Enter the repository name as Student-Task-Management-System.
+4. Choose Public or Private according to your preference.
+5. Initialize the repository with a README file if desired.
+6. Create the repository.
+7. Copy its repository URL.
+
+Step 15: Connect the Local Project to GitHub
+
+1. Open a terminal on a computer where Git is installed.
+
+2. Create a project directory and enter it.
+
+3. Initialize Git and configure the local project.
+
+   git init
+   git config user.name "Your Name"
+   git config user.email "[your-email@example.com](mailto:your-email@example.com)"
+
+4. Create a sample README file if one does not already exist.
+
+5. Stage and commit the files.
+
+   git add .
+   git commit -m "STMS-1 Initial project setup"
+
+6. Rename the current branch to main if required.
+
+   git branch -M main
+
+7. Connect the local repository to GitHub.
+
+   git remote add origin YOUR_GITHUB_REPOSITORY_URL
+
+8. Push the code to GitHub.
+
+   git push -u origin main
+
+9. Verify that the files appear in the GitHub repository.
+
+Replace the example name, email, and repository URL with your own details. If the repository already contains a README, avoid creating conflicting initial histories.
+
+PART I: CONFIGURE JENKINS FOR AUTOMATED BUILDING AND TESTING
+
+Step 16: Access Jenkins
+
+1. Open the Jenkins server provided by your college or use an appropriately configured local installation.
+2. Log in to Jenkins.
+3. Verify that Jenkins is running and accessible.
+4. Confirm that Git and the required build tools are available to Jenkins.
+
+Note: Jenkins must be installed or hosted on an accessible server. Creating a Jenkins login alone does not provide a running server.
+
+Step 17: Configure GitHub Access
+
+1. Open the Jenkins dashboard.
+2. Navigate to Manage Jenkins and locate the available tool configuration.
+3. Verify the Git installation or configure its path if necessary.
+4. Configure the required Java or other build tools if applicable.
+5. Store any required GitHub credentials securely in Jenkins.
+6. Verify that Jenkins can access the repository.
+
+For a public repository, read access may not require GitHub credentials. Private repositories generally require appropriate authentication.
+
+Step 18: Create a Jenkins Job
+
+1. Click New Item on the Jenkins dashboard.
+2. Enter a job name such as STMS-CI.
+3. Select Pipeline or another suitable job type.
+4. Configure the job to retrieve source code from GitHub.
+5. Enter the repository URL.
+6. Select the appropriate branch, such as main.
+7. Configure the build and test commands according to the project's technology.
+8. Save the configuration.
+
+For a project containing a suitable Jenkinsfile, configure Pipeline to use Pipeline script from SCM and select Git as the source-control system.
+
+Step 19: Execute and Verify the Pipeline
+
+1. Click Build Now.
+2. Open the running build.
+3. Select Console Output.
+4. Review the logs for repository checkout, build execution, and tests.
+5. Verify that the build succeeds.
+6. If the build fails, inspect the error messages and correct the configuration.
+7. Run the build again and verify the result.
+
+A successful build demonstrates automated execution of the configured pipeline. Automatic triggering after a GitHub push requires an appropriate webhook, polling configuration, or another supported trigger.
+
+PART J: LINK JIRA WITH DEVELOPMENT ACTIVITIES
+
+Step 20: Link Commits to Jira Tasks
+
+1. Open a Jira task, for example STMS-1.
+2. Note its issue key.
+3. Open the local Git repository.
+4. Include the Jira issue key in the branch name or commit message.
+
+Example:
+
+git commit -m "STMS-1 Add initial project setup"
+
+5. Push the commit to GitHub.
+6. Open the corresponding Jira issue.
+7. Check the Development or related activity section if available.
+8. Verify that the commit appears when the relevant integration and permissions are configured.
+
+Step 21: Review the Complete Agile and DevOps Workflow
+
+1. Create and prioritize tasks in Jira.
+2. Organize tasks using the backlog and board.
+3. Track task progress through workflow statuses.
+4. Schedule tasks using the timeline.
+5. Collaborate with authorized team members.
+6. Store project code in GitHub.
+7. Use Jenkins to build and test the code.
+8. Link development activities to Jira issues.
+9. Review the project status and available build results.
+
+The completed workflow demonstrates how Agile planning and DevOps automation support coordinated software development.
+
+THEORY
+
+Agile is an iterative software development methodology that divides work into small, manageable tasks. It emphasizes collaboration, flexibility, continuous feedback, and incremental delivery.
+
+Jira is a project management tool used to organize requirements, create tasks, prioritize work, plan sprints, assign responsibilities, and monitor progress.
+
+The main stages of the Agile Software Project Lifecycle are requirement gathering, planning, development, testing, review, deployment, and continuous improvement.
+
+The Jira Backlog stores pending work, while the Board displays tasks according to their workflow status. The List view provides a structured representation of tasks, and the Timeline helps visualize task schedules and dependencies. Collaborators can participate in project activities according to their assigned permissions.
+
+DevOps combines development and operations to improve the speed, reliability, and consistency of software delivery. GitHub provides version control and source-code hosting, while Jenkins automates build and testing operations.
+
+A typical DevOps pipeline follows:
+
+Plan → Code → Build → Test → Deploy → Monitor
+
+Jira issues can be associated with development activities through issue keys and supported integrations. Actual automated integration requires appropriate configuration, access permissions, and functioning services.
+
+CONCLUSION
+
+The Agile Software Project Lifecycle was studied and implemented using Jira. A project was organized into tasks, and project planning and progress tracking were demonstrated through the available Summary, Backlog, Board, List, and Timeline features. The procedure for adding collaborators was studied, and the integration workflow involving Jira, GitHub, and Jenkins was explored to understand how Agile project management and DevOps automation work together.
