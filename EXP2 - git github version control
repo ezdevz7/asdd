@@ -1,0 +1,365 @@
+# EXPERIMENT NO. 2
+
+## AIM
+
+To perform version control operations using Git and GitHub and apply collaboration workflows for software development.
+
+## STEPS
+
+### Step 1: Check Git Installation
+
+1. Start the computer and open Command Prompt or the VS Code terminal.
+
+2. Execute the following command:
+
+   git --version
+
+3. If Git is installed, its version will be displayed.
+
+4. If Git is not installed, install it if you have permission. Otherwise, use a computer with Git installed or request assistance from the lab administrator.
+
+5. Reopen the terminal after installation and verify Git again.
+
+### Step 2: Configure Git with Your Details
+
+1. Configure your Git username:
+
+   git config --global user.name "ezdevz7"
+
+2. Configure your Git email:
+
+   git config --global user.email "[destinymaker10@gmail.com](mailto:destinymaker10@gmail.com)"
+
+3. Verify the configuration:
+
+   git config --global --list
+
+4. Confirm that the username and email are correct.
+
+Note: These commands configure Git for your operating-system user on that computer. On a shared college computer, you can configure the current repository only by omitting `--global` from the configuration commands.
+
+If you do not want your personal email exposed in commits to public repositories, you can use the GitHub-provided noreply email listed in your account settings instead.
+
+### Step 3: Create a Project Directory
+
+1. Open Command Prompt or the VS Code terminal.
+
+2. Navigate to the location where you want to create the project.
+
+3. Create a directory named GitProject:
+
+   mkdir GitProject
+
+4. Enter the directory:
+
+   cd GitProject
+
+5. Verify the current location:
+
+   cd
+
+6. List the files in the directory:
+
+   dir
+
+The directory should be empty at this stage.
+
+### Step 4: Initialize the Git Repository
+
+1. Inside the GitProject directory, execute:
+
+   git init
+
+2. Git initializes a local repository.
+
+3. Check the repository status:
+
+   git status
+
+4. Verify that Git displays the current branch and indicates that there are no committed project files yet.
+
+### Step 5: Create a README File
+
+1. Create a README.md file using the following command in Windows Command Prompt:
+
+   echo # GitProject> README.md
+
+2. Check that the file exists:
+
+   dir
+
+3. Check the Git status:
+
+   git status
+
+4. Verify that README.md is listed as an untracked file.
+
+Alternatively, create README.md using VS Code and enter:
+
+# GitProject
+
+This repository demonstrates version control using Git and GitHub.
+
+Save the file before continuing.
+
+### Step 6: Stage the File
+
+1. Add README.md to the staging area:
+
+   git add README.md
+
+2. Check the repository status:
+
+   git status
+
+3. Verify that README.md appears under changes to be committed.
+
+The staging area prepares selected changes for the next commit.
+
+### Step 7: Create the Initial Commit
+
+1. Execute:
+
+   git commit -m "Initial commit"
+
+2. Git records the staged changes in the local repository.
+
+3. Verify the commit history:
+
+   git log --oneline
+
+4. Confirm that the initial commit appears.
+
+If Git reports an unknown author identity, configure your username and email as described in Step 2 and retry.
+
+### Step 8: Rename the Branch to Main
+
+1. Execute:
+
+   git branch -M main
+
+2. Verify the branch:
+
+   git branch
+
+3. Confirm that the current branch is named main.
+
+### Step 9: Create a GitHub Repository
+
+1. Open your browser.
+
+2. Visit https://github.com
+
+3. Log in using your GitHub account, ezdevz7.
+
+4. Click the plus (+) icon in the top navigation bar.
+
+5. Select New repository.
+
+6. Enter the repository name:
+
+   GitProject
+
+7. Choose Public or Private according to your preference.
+
+8. Since you already initialized the local repository and created a commit, leave the options to initialize the remote repository with a README, license, or .gitignore unchecked.
+
+9. Click Create repository.
+
+10. Copy the HTTPS repository URL.
+
+For your account, the expected URL is:
+
+https://github.com/ezdevz7/GitProject.git
+
+Use the actual URL displayed by GitHub if it differs.
+
+### Step 10: Connect the Local Repository to GitHub
+
+1. Return to the terminal inside the GitProject directory.
+
+2. Add your GitHub repository as the remote named origin:
+
+   git remote add origin https://github.com/ezdevz7/GitProject.git
+
+3. Verify the remote connection:
+
+   git remote -v
+
+4. Confirm that the GitHub URL appears for fetch and push operations.
+
+If the remote named origin already exists, inspect it using `git remote -v` before changing it.
+
+### Step 11: Push the Code to GitHub
+
+1. Confirm the current branch:
+
+   git branch
+
+2. Push the main branch to GitHub:
+
+   git push -u origin main
+
+3. Complete the GitHub authentication process if prompted.
+
+4. Wait for the push operation to finish.
+
+5. Open your GitHub repository:
+
+   https://github.com/ezdevz7/GitProject
+
+6. Refresh the page.
+
+7. Verify that README.md and the initial commit are visible.
+
+Note: GitHub does not accept your account password for Git-over-HTTPS authentication. Use an approved sign-in method, such as Git Credential Manager or browser-based authentication. Never place passwords or access tokens in your repository.
+
+### Step 12: Modify a File and Create Another Commit
+
+1. Open README.md in VS Code.
+
+2. Add the following line:
+
+   This project demonstrates version control using Git and GitHub.
+
+3. Save the file.
+
+4. Check the changes:
+
+   git status
+
+5. Stage the modified file:
+
+   git add README.md
+
+6. Create a new commit:
+
+   git commit -m "Update project README"
+
+7. Push the changes:
+
+   git push
+
+8. Refresh your GitHub repository.
+
+9. Verify that the updated README is displayed.
+
+### Step 13: Create a Feature Branch
+
+1. Create a new branch:
+
+   git branch feature
+
+2. Switch to the feature branch:
+
+   git switch feature
+
+3. Verify the current branch:
+
+   git branch
+
+4. Open README.md and add a feature description.
+
+5. Save the file.
+
+6. Stage and commit the changes:
+
+   git add README.md
+
+   git commit -m "Add feature description"
+
+7. Push the feature branch to GitHub:
+
+   git push -u origin feature
+
+8. Open your GitHub repository.
+
+9. Use the branch selector to verify that the feature branch exists.
+
+### Step 14: Merge the Feature Branch
+
+1. Switch back to the main branch:
+
+   git switch main
+
+2. Merge the feature branch:
+
+   git merge feature
+
+3. Check the repository status:
+
+   git status
+
+4. Push the updated main branch:
+
+   git push
+
+5. Open GitHub and verify that the changes are present in the main branch.
+
+If a merge conflict occurs, resolve the conflicting file, stage the resolution, and complete the merge before pushing.
+
+### Step 15: Verify All Operations
+
+Execute the following commands:
+
+git --version
+
+git config --list
+
+git status
+
+git log --oneline
+
+git branch
+
+git remote -v
+
+Verify that:
+
+1. Git is installed.
+2. Your Git configuration is correct.
+3. The local repository has been initialized.
+4. The README file has been committed.
+5. The main and feature branches exist.
+6. The remote URL points to your GitHub repository.
+7. Changes have been pushed successfully.
+8. The feature branch has been merged into main.
+
+## THEORY
+
+Git is a distributed version control system used to track changes in source code and other project files. It allows developers to maintain different versions of a project, create branches, and collaborate efficiently.
+
+GitHub is a web-based platform for hosting Git repositories. It provides features such as pull requests, code reviews, issue tracking, and collaboration.
+
+Important Git commands:
+
+* `git --version`: Displays the installed Git version.
+* `git config`: Configures Git settings.
+* `git init`: Initializes a local repository.
+* `git status`: Displays the current repository status.
+* `git add`: Stages changes for a commit.
+* `git commit`: Records staged changes.
+* `git log`: Displays commit history.
+* `git branch`: Lists or creates branches.
+* `git switch`: Switches between branches.
+* `git merge`: Integrates changes from another branch.
+* `git remote add`: Connects a local repository to a remote repository.
+* `git push`: Uploads local commits to a remote repository.
+* `git pull`: Fetches and integrates remote changes.
+* `git clone`: Creates a local copy of an existing remote repository.
+
+The Git workflow consists of:
+
+Working Directory → Staging Area → Local Repository → Remote Repository
+
+The working directory contains files being edited. The staging area contains selected changes ready to be committed. The local repository stores commits, while the remote repository allows developers to share their work.
+
+Branching supports parallel development, allowing developers to work on separate features without directly modifying the main branch. Merging combines completed changes from different branches.
+
+GitHub collaboration workflows commonly use branches, commits, pull requests, code reviews, and merges.
+
+On shared college computers, users should verify their Git configuration, authenticate using their own accounts, avoid saving credentials unnecessarily, and sign out or remove personal credentials when finished.
+
+## CONCLUSION
+
+Version control operations were performed using Git and GitHub. A local repository was created and configured using the GitHub account ezdevz7. Files were staged and committed, branches were created, and the local repository was connected to GitHub. Changes were pushed to the remote repository, and the feature branch was merged into the main branch. This experiment demonstrates how Git and GitHub support version tracking and collaborative software development.
