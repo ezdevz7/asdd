@@ -1,327 +1,86 @@
-# EXPERIMENT NO. 3
+AIM
 
-## AIM
+To install Jenkins, configure the required Java environment, launch Jenkins on an available port, and execute a sample “Hello World” build.
 
-To install Jenkins, configure the required Java environment, launch Jenkins on an available port, and trigger a sample build for a Hello World program.
+PREREQUISITES
 
-## STEPS
+1. A computer with internet access.
+2. Java JDK installed.
+3. Jenkins installed.
+4. A web browser.
 
-### Step 1: Check the Java Installation
+PROCEDURE
 
-1. Start the Windows computer.
+Step 1: Install Java
 
-2. Open Command Prompt or the VS Code terminal.
+1. Download and install a Java JDK version supported by your Jenkins release.
+2. Open Command Prompt and execute:
 
-3. Check the installed Java version:
+```bash
+java -version
+```
 
-   java -version
+3. Verify that the installed Java version is displayed.
 
-4. Check whether the Java compiler is available:
+Step 2: Install and Launch Jenkins
 
-   javac -version
+1. Download Jenkins from the official website: [Jenkins](https://www.jenkins.io/download/?utm_source=chatgpt.com).
+2. Install Jenkins using the appropriate installer for your operating system.
+3. Start the Jenkins service.
+4. Jenkins typically runs on port `8080`. If that port is unavailable, configure another available port.
+5. Open your browser and enter:
 
-5. If both commands display version information, Java and the compiler are available.
+```text
+http://localhost:8080
+```
 
-6. If either command is not recognized, check whether Java is installed and configured correctly.
+6. Complete the initial setup, unlock Jenkins using the initial administrator password, and install the suggested plugins.
+7. Create an administrator account and open the Jenkins dashboard.
 
-Jenkins requires a compatible Java runtime. For a new installation, use a Java version supported by the Jenkins release you intend to install. Check the official Jenkins documentation before choosing the JDK version.
+Step 3: Create a Sample Build Job
 
-Official resources:
-https://www.jenkins.io/doc/book/installing/
-https://adoptium.net/
+1. Click **New Item** on the Jenkins dashboard.
+2. Enter `Hello-World-Build` as the job name.
+3. Select **Freestyle project** and click **OK**.
+4. Under the **Build Steps** section, select **Execute Windows batch command** on Windows or **Execute shell** on Linux.
 
-### Step 2: Install Java if Required
+Step 4: Configure the Build Command
 
-1. Open the official Adoptium website:
+For Windows, enter:
 
-   https://adoptium.net/
+```bat
+echo Hello World from Jenkins!
+```
 
-2. Download a supported JDK version compatible with your Jenkins release and operating system.
+For Linux, enter:
 
-3. Run the installer if you have permission to install software.
+```bash
+echo "Hello World from Jenkins!"
+```
 
-4. Follow the installation instructions.
+Click **Save** to store the job configuration.
 
-5. If the installer provides an option to configure JAVA_HOME or update PATH, enable the appropriate options.
+Step 5: Execute and Verify the Build
 
-6. Finish the installation.
+1. Open the `Hello-World-Build` job.
+2. Click **Build Now**.
+3. Open **Build History** and select the latest build number.
+4. Click **Console Output**.
+5. Verify that the output displays:
 
-7. Close and reopen Command Prompt.
-
-8. Verify the installation:
-
-   java -version
-
-   javac -version
-
-9. If the commands are still not recognized, check the installation directory and environment variables.
-
-If you cannot install software on the college computer, ask the lab administrator to provide a compatible Java installation or use a computer where you have permission.
-
-### Step 3: Download Jenkins
-
-1. Open the official Jenkins website:
-
-   https://www.jenkins.io/download/
-
-2. Select the appropriate installation instructions for Windows.
-
-3. Choose the stable Jenkins release recommended for your practical.
-
-4. Download the Windows installer.
-
-5. Before installing, verify that the installed Java version is compatible with the selected Jenkins release.
-
-### Step 4: Install Jenkins on Windows
-
-1. Locate the downloaded Jenkins installer.
-2. Run the installer with the required permissions.
-3. Follow the installation wizard.
-4. Choose the installation directory.
-5. Configure the Jenkins service account according to the installer and your permissions.
-6. Select the port on which Jenkins should listen. The default port is commonly 8080.
-7. Complete the installation.
-8. If Jenkins is configured as a Windows service, verify that the service starts successfully.
-
-If you do not have administrator access, do not attempt to bypass the computer's restrictions. Use an approved Jenkins server or request assistance from the lab administrator.
-
-### Step 5: Launch Jenkins and Check the Port
-
-1. Open a browser.
-
-2. Enter the following address:
-
-   http://localhost:8080
-
-3. If Jenkins is running on port 8080, the Jenkins setup or login page should appear.
-
-4. If the page does not open, check whether the Jenkins service is running.
-
-5. Check whether another application is already using port 8080.
-
-6. If the port is unavailable, configure Jenkins to use another available port, such as 8081, if you have the required permissions.
-
-7. Restart Jenkins if the configuration requires it.
-
-8. Open the appropriate address:
-
-   http://localhost:8081
-
-Use the port actually configured for Jenkins.
-
-Note: `localhost` refers to the computer on which the browser is running. If Jenkins is hosted on a college server, use the server address provided by your instructor instead.
-
-### Step 6: Complete the Initial Jenkins Setup
-
-1. Open the Jenkins page in your browser.
-
-2. If the Unlock Jenkins page appears, locate the initial administrator password file specified by the setup instructions.
-
-3. On a standard Windows installation, the file is commonly located at:
-
-   C:\ProgramData\Jenkins.jenkins\secrets\initialAdminPassword
-
-4. If the installation uses a different Jenkins home directory, locate the password file in the configured home directory.
-
-5. Read the initial administrator password from the file.
-
-6. Enter the password into the setup page.
-
-7. Click Continue.
-
-8. Select Install suggested plugins, or choose the required plugins if instructed by your teacher.
-
-9. Wait for the installation to complete.
-
-10. Create the initial administrator account when prompted.
-
-11. Complete the instance configuration.
-
-12. Open the Jenkins dashboard.
-
-Do not share the initial administrator password or other Jenkins credentials.
-
-If Jenkins is already configured on a college server, log in using the credentials provided by your instructor instead of repeating the initial setup.
-
-### Step 7: Verify Jenkins Is Running
-
-1. Open the Jenkins dashboard.
-2. Check that the dashboard loads successfully.
-3. Locate the option to create a new job.
-4. Verify that the interface is accessible.
-5. If the dashboard does not load, check the Jenkins service status and the configured port.
-
-The successful display of the Jenkins dashboard confirms that Jenkins is accessible.
-
-### Step 8: Create the Hello World Java Program
-
-1. Open VS Code or another text editor.
-
-2. Create a file named:
-
-   HelloWorld.java
-
-3. Enter the following Java code:
-
-   public class HelloWorld {
-   public static void main(String[] args) {
-   System.out.println("Hello World from Jenkins!");
-   }
-   }
-
-4. Save the file in a suitable project directory.
-
-The program prints a simple message when executed.
-
-### Step 9: Compile and Test the Java Program
-
-1. Open the terminal in the directory containing HelloWorld.java.
-
-2. Compile the program:
-
-   javac HelloWorld.java
-
-3. If compilation succeeds, a file named HelloWorld.class is generated.
-
-4. Execute the program:
-
-   java HelloWorld
-
-5. Verify that the output is:
-
-   Hello World from Jenkins!
-
-6. If compilation fails, check the Java installation, file name, and source code.
-
-### Step 10: Create a Freestyle Project in Jenkins
-
-1. Open the Jenkins dashboard.
-
-2. Click New Item.
-
-3. Enter the job name:
-
-   HelloWorld-Build
-
-4. Select Freestyle project.
-
-5. Click OK.
-
-6. Open the job configuration page.
-
-7. Locate the Build Steps section.
-
-8. Click Add build step.
-
-9. Select Execute Windows batch command.
-
-10. Enter the following commands:
-
-javac HelloWorld.java
-java HelloWorld
-
-11. Save the configuration.
-
-Important: The Java source file must be available in the job's workspace. The simplest way to provide it is to store HelloWorld.java in a Git repository and configure Jenkins to check out that repository. Alternatively, create the file in the job's workspace before running the build.
-
-If your Jenkins server runs on Linux, use an appropriate shell build step instead of the Windows batch command.
-
-### Step 11: Provide the Source Code to Jenkins
-
-1. Create a GitHub repository named:
-
-   HelloWorld-Jenkins
-
-2. Add the HelloWorld.java file to the repository.
-
-3. Commit and push the source code.
-
-4. Open the Jenkins job configuration.
-
-5. Locate the Source Code Management section.
-
-6. Select Git.
-
-7. Enter the repository URL:
-
-   YOUR_GITHUB_REPOSITORY_URL
-
-8. Select the appropriate branch, such as main.
-
-9. Save the configuration.
-
-For a public repository, Jenkins may be able to retrieve the source without credentials. For a private repository, configure suitable credentials securely.
-
-If you already have a working local workspace and your instructor permits it, you can use that workspace instead. The GitHub approach is more reproducible on another computer.
-
-### Step 12: Configure the Build Step
-
-1. Reopen the HelloWorld-Build job configuration.
-
-2. Verify that the source-code checkout is configured correctly.
-
-3. Under Build Steps, select Execute Windows batch command.
-
-4. Enter:
-
-   javac HelloWorld.java
-   if errorlevel 1 exit /b 1
-   java HelloWorld
-
-5. Save the configuration.
-
-The first command compiles the Java source file. The second stops the build if compilation fails. The third executes the compiled program.
-
-Ensure that the Jenkins service account can access Java and that the Java installation directory is included in its PATH. If the commands are unavailable to Jenkins, configure the required environment variables or use the appropriate tool configuration.
-
-### Step 13: Trigger the Jenkins Build
-
-1. Open the HelloWorld-Build job.
-2. Click Build Now.
-3. Wait for the build to start and finish.
-4. Open the build history.
-5. Select the latest build number.
-6. Click Console Output.
-7. Review the build log.
-
-If the build succeeds, the console output should include:
-
+```text
 Hello World from Jenkins!
+Finished: SUCCESS
+```
 
-8. Verify that the build status is successful.
+THEORY
 
-If the build fails, inspect the console output and correct any Java, workspace, source-code checkout, or permission problems before running it again.
+Jenkins is an open-source automation server used for continuous integration and continuous delivery (CI/CD). It automates repetitive software development tasks such as building, testing, and deploying applications.
 
-### Step 14: Verify the Final Result
+Java is a prerequisite for running Jenkins. Jenkins provides a web-based dashboard through which users can create jobs, configure build steps, execute tasks, and monitor results.
 
-Verify the following:
+A Jenkins job contains instructions that Jenkins executes when a build is triggered. In this experiment, a Freestyle project executes a simple command to display a message. The Console Output displays the execution logs and indicates whether the build succeeded or failed.
 
-1. Java is installed and compatible with Jenkins.
-2. Jenkins is running and accessible through the configured port.
-3. The Jenkins dashboard opens successfully.
-4. The HelloWorld.java program compiles and runs.
-5. The Jenkins job is configured correctly.
-6. The source code is available in the Jenkins workspace.
-7. The build can be triggered manually.
-8. The Console Output displays the Hello World message.
-9. The build finishes successfully.
+CONCLUSION
 
-## THEORY
-
-Jenkins is an open-source automation server used for continuous integration and continuous delivery. It automates repetitive development tasks such as compiling source code, running tests, and preparing applications for deployment.
-
-Java is required to run Jenkins. A compatible Java Development Kit can also be used to compile and execute Java programs.
-
-A Jenkins job defines the tasks that Jenkins performs. A Freestyle project allows developers to configure source-code management, build steps, and other operations through the Jenkins interface.
-
-In this experiment, a Java program named HelloWorld.java is compiled using the Java compiler and executed by the Jenkins job. Jenkins retrieves the source code, runs the configured build commands, and displays the execution results in the console log.
-
-The basic workflow is:
-
-Java Setup → Jenkins Installation → Jenkins Configuration → Source Code Setup → Build Execution → Console Output Verification
-
-Continuous Integration (CI) involves regularly integrating source-code changes and automatically validating them through builds and tests. A manually triggered Hello World job demonstrates the basic build process, but it is not by itself a complete automated CI/CD pipeline.
-
-## CONCLUSION
-
-Jenkins was installed or accessed, the required Java environment was configured, and Jenkins was launched on an available port. A Hello World Java program was created, compiled, and configured as a Jenkins build job. The build was triggered, and its console output was examined to verify execution. This experiment demonstrates the fundamentals of Jenkins installation, job configuration, and automated build execution.
+Jenkins was installed and launched after configuring the required Java environment. A sample Freestyle project was created and executed successfully, displaying the “Hello World” message in the Console Output. Thus, the basic installation and build execution of Jenkins were demonstrated.
