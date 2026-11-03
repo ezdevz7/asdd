@@ -1,0 +1,383 @@
+EXPERIMENT 5: KUBERNETES USING MINIKUBE AND HYPER-V
+
+AIM
+
+To set up a local Kubernetes cluster using Minikube with the Hyper-V driver, deploy an application, configure environment variables, monitor the cluster, and expose the application using a NodePort service.
+
+---
+
+## PROCEDURE
+
+1. Install Docker Desktop, Minikube, and kubectl on Windows.
+2. Enable Hyper-V virtualization and start Docker Desktop.
+3. Open PowerShell and start the Minikube cluster using the Hyper-V driver.
+4. Verify the cluster and check whether the Kubernetes node is ready.
+5. Deploy an Nginx application using a Kubernetes Deployment.
+6. Configure an environment variable for the application.
+7. Expose the application using a NodePort service.
+8. Open the application in a web browser and verify the Nginx welcome page.
+9. Launch the Kubernetes dashboard to monitor the cluster resources.
+10. Verify the deployment, pods, services, and cluster status.
+
+---
+
+## STEPS AND COMMANDS
+
+STEP 1: VERIFY THE PREREQUISITES
+
+WHERE TO EXECUTE:
+Windows PowerShell or Command Prompt.
+
+1. Start Docker Desktop from the Windows Start menu.
+2. Wait until Docker Desktop indicates that its engine is running.
+3. Open PowerShell.
+4. Execute the following commands one by one.
+
+Check Docker:
+
+docker --version
+
+Check Minikube:
+
+minikube version
+
+Check kubectl:
+
+kubectl version --client
+
+EXPECTED OUTPUT:
+The installed version of each tool should be displayed.
+
+NOTE:
+If a command is not recognized, verify that the tool is installed and its executable is available through PATH.
+
+Ensure that Hyper-V is enabled and that the system supports hardware virtualization.
+
+---
+
+STEP 2: START THE MINIKUBE CLUSTER
+
+WHERE TO EXECUTE:
+PowerShell opened as Administrator.
+
+Execute:
+
+minikube start --driver=hyperv
+
+Wait until Minikube completes the cluster startup process.
+
+Check the cluster status:
+
+minikube status
+
+EXPECTED OUTPUT:
+The Minikube host, kubelet, and Kubernetes control plane should be running.
+
+NOTE:
+If Minikube reports a Hyper-V error, check whether Hyper-V is enabled and properly configured.
+
+---
+
+STEP 3: VERIFY THE KUBERNETES CLUSTER
+
+WHERE TO EXECUTE:
+The same PowerShell window.
+
+Check the cluster information:
+
+kubectl cluster-info
+
+List the Kubernetes nodes:
+
+kubectl get nodes
+
+Display additional node information:
+
+kubectl get nodes -o wide
+
+EXPECTED OUTPUT:
+The Minikube node should appear in the output with its status shown as Ready.
+
+This confirms that kubectl can communicate with the Kubernetes cluster.
+
+---
+
+STEP 4: DEPLOY THE NGINX APPLICATION
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Create a Deployment named hello-app using the Nginx image:
+
+kubectl create deployment hello-app --image=nginx
+
+Check the Deployment:
+
+kubectl get deployments
+
+Check the application pods:
+
+kubectl get pods
+
+Wait until the Deployment is ready:
+
+kubectl rollout status deployment/hello-app
+
+Display detailed Deployment information:
+
+kubectl describe deployment hello-app
+
+Check the pods again:
+
+kubectl get pods
+
+EXPECTED OUTPUT:
+The hello-app Deployment should be available, and its pod should reach the Running state.
+
+If the pod is not running, execute:
+
+kubectl describe pods
+
+Check the pod events for errors. If the image is still downloading, wait and check again.
+
+---
+
+STEP 5: CONFIGURE ENVIRONMENT VARIABLES
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Set the APP_ENV environment variable to development:
+
+kubectl set env deployment/hello-app APP_ENV=development
+
+Wait for the Deployment update to complete:
+
+kubectl rollout status deployment/hello-app
+
+Verify the Deployment configuration:
+
+kubectl describe deployment hello-app
+
+Locate the environment variables section and check for:
+
+APP_ENV=development
+
+Check the pods:
+
+kubectl get pods
+
+EXPECTED OUTPUT:
+The Deployment configuration should contain APP_ENV with the value development.
+
+NOTE:
+Kubernetes may create a replacement pod after the Deployment is updated.
+
+The environment variable is configured for the container. It does not change the default Nginx welcome page.
+
+---
+
+STEP 6: EXPOSE THE APPLICATION USING NODEPORT
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Expose the Deployment through a NodePort service:
+
+kubectl expose deployment hello-app --type=NodePort --port=80
+
+Check the available services:
+
+kubectl get services
+
+Display detailed service information:
+
+kubectl describe service hello-app
+
+Check the service endpoints:
+
+kubectl get endpoints hello-app
+
+EXPECTED OUTPUT:
+The hello-app service should appear with the type NodePort.
+
+Kubernetes automatically assigns a NodePort, normally within the range 30000-32767.
+
+The service forwards incoming requests to the Nginx application on port 80.
+
+---
+
+STEP 7: ACCESS THE APPLICATION THROUGH A WEB BROWSER
+
+WHERE TO EXECUTE:
+First, use PowerShell. Then use Google Chrome or another web browser.
+
+In PowerShell, execute:
+
+minikube service hello-app
+
+Minikube will attempt to open the service in the default browser.
+
+If the browser does not open automatically, execute:
+
+minikube service hello-app --url
+
+Copy the URL displayed in PowerShell.
+
+Open Google Chrome and paste the URL into the address bar.
+
+Press Enter.
+
+EXPECTED OUTPUT:
+The Nginx welcome page should appear in the browser.
+
+This confirms that the application is accessible through the NodePort service.
+
+If the page does not load, return to PowerShell and execute:
+
+kubectl get pods
+
+kubectl get services
+
+kubectl get endpoints hello-app
+
+Check that the pod is running and the service has valid endpoints.
+
+---
+
+STEP 8: MONITOR THE CLUSTER USING THE KUBERNETES DASHBOARD
+
+WHERE TO EXECUTE:
+PowerShell and a web browser.
+
+In PowerShell, execute:
+
+minikube dashboard
+
+Wait for Minikube to open the Kubernetes dashboard in the browser.
+
+If necessary, wait for the dashboard to start and for the browser URL to appear.
+
+IN THE BROWSER:
+
+1. Open the Kubernetes dashboard.
+2. Navigate to the Deployments section.
+3. Verify that hello-app is listed.
+4. Open the Pods section and check the Nginx pod status.
+5. Open the Services section and verify the hello-app service.
+6. Inspect the available cluster resources.
+
+EXPECTED OUTPUT:
+The dashboard should display the Deployment, pod, service, and other available Kubernetes resources.
+
+The dashboard provides a graphical interface for monitoring the cluster.
+
+NOTE:
+Keep the dashboard command running while using the dashboard. Do not close its PowerShell window until monitoring is complete.
+
+---
+
+STEP 9: FINAL VERIFICATION
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Check Minikube:
+
+minikube status
+
+Check the nodes:
+
+kubectl get nodes
+
+Check the Deployment:
+
+kubectl get deployments
+
+Check the pods:
+
+kubectl get pods
+
+Check the services:
+
+kubectl get services
+
+Check the environment variable configuration:
+
+kubectl describe deployment hello-app
+
+EXPECTED RESULTS:
+
+1. Minikube is running.
+2. The Kubernetes node is Ready.
+3. The hello-app Deployment is available.
+4. The Nginx pod is running.
+5. APP_ENV is configured as development.
+6. The hello-app service is exposed using NodePort.
+7. The Nginx welcome page is accessible through the generated URL.
+8. The Kubernetes dashboard displays the cluster resources.
+
+---
+
+STEP 10: CLEANUP (OPTIONAL)
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Perform these commands only after completing the experiment and recording the results.
+
+Delete the NodePort service:
+
+kubectl delete service hello-app
+
+Delete the Deployment:
+
+kubectl delete deployment hello-app
+
+Stop the Minikube cluster:
+
+minikube stop
+
+NOTE:
+Cleanup is optional. Do not delete the resources before completing the practical or taking the required screenshots.
+
+---
+
+## THEORY
+
+Kubernetes is an open-source container orchestration platform used to deploy, manage, and scale containerized applications.
+
+Minikube:
+Minikube creates a local Kubernetes cluster for development and testing.
+
+Hyper-V:
+Hyper-V is a virtualization technology that allows virtual machines to run on Windows.
+
+kubectl:
+kubectl is a command-line tool used to communicate with and manage Kubernetes clusters.
+
+Pod:
+A pod is the smallest deployable unit in Kubernetes. It contains one or more containers.
+
+Deployment:
+A Deployment manages application pods and maintains the desired application state.
+
+Environment Variables:
+Environment variables provide configuration values to containers without requiring changes to application code.
+
+Service:
+A Service provides a stable way to access a group of pods.
+
+NodePort:
+NodePort exposes a Kubernetes service through a port on the node, allowing access from outside the cluster when networking permits.
+
+Kubernetes Dashboard:
+The dashboard provides a graphical interface for inspecting and monitoring Kubernetes resources.
+
+In this experiment, Minikube creates the local Kubernetes cluster, Kubernetes runs Nginx in a pod managed by a Deployment, and a NodePort service exposes the application. An environment variable is configured, and the dashboard is used to monitor the cluster.
+
+---
+
+## CONCLUSION
+
+A local Kubernetes cluster was set up using Minikube and Hyper-V. An Nginx application was deployed, an environment variable was configured, and the application was exposed using a NodePort service. The application was accessed through a web browser, and the cluster resources were monitored using the Kubernetes dashboard.
