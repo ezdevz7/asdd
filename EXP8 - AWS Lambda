@@ -1,0 +1,209 @@
+EXPERIMENT 8: SERVERLESS FUNCTION USING AWS LAMBDA
+
+AIM
+
+To understand AWS Lambda, its workflow, various functions, and create and test a serverless function using Python.
+
+---
+
+PROCEDURE
+
+1. Sign in to the AWS Management Console using a web browser.
+2. Navigate to the AWS Lambda service and create a new function.
+3. Configure the function name, Python runtime, and execution role.
+4. Write the Python code in the Lambda code editor and deploy it.
+5. Create a test event and execute the Lambda function.
+6. Verify the execution status and output.
+7. Monitor the function using Amazon CloudWatch.
+8. Explore integration with other AWS services for triggering the function.
+
+---
+
+STEPS AND COMMANDS
+
+STEP 1: SIGN IN TO AWS
+
+WHERE TO EXECUTE:
+Google Chrome or any web browser.
+
+1. Open the AWS Management Console.
+2. Sign in using your AWS account credentials.
+3. Search for Lambda in the Services search bar.
+4. Open the AWS Lambda service.
+
+EXPECTED RESULT:
+The AWS Lambda console opens.
+
+---
+
+STEP 2: CREATE A LAMBDA FUNCTION
+
+WHERE TO EXECUTE:
+AWS Management Console in the browser.
+
+1. Click Create function.
+2. Select Author from scratch.
+3. Enter the following function name:
+
+MyFirstLambda
+
+4. Select Python as the runtime.
+5. Under Permissions, select Create a new role with basic Lambda permissions.
+6. Click Create function.
+
+EXPECTED RESULT:
+The MyFirstLambda function is created successfully.
+
+---
+
+STEP 3: WRITE THE PYTHON CODE
+
+WHERE TO EXECUTE:
+AWS Lambda Code Editor in the browser.
+
+1. Open the MyFirstLambda function.
+2. Navigate to the Code section.
+3. Replace the existing code with the following program:
+
+def lambda_handler(event, context):
+return {
+'statusCode': 200,
+'body': 'Hello, AWS Lambda!'
+}
+
+4. Click Deploy to save the code.
+
+EXPECTED RESULT:
+The Python code is deployed successfully.
+
+---
+
+STEP 4: CREATE A TEST EVENT
+
+WHERE TO EXECUTE:
+AWS Lambda interface in the browser.
+
+1. Click Test.
+2. Select Create new test event.
+3. Enter the event name:
+
+TestEvent
+
+4. Keep the default test event JSON.
+5. Click Save.
+
+EXPECTED RESULT:
+The test event is saved and ready to execute the function.
+
+---
+
+STEP 5: EXECUTE THE LAMBDA FUNCTION
+
+WHERE TO EXECUTE:
+AWS Lambda interface in the browser.
+
+1. Click Test.
+2. Wait for the function to execute.
+3. Check the Execution result section.
+
+EXPECTED OUTPUT:
+
+{
+"statusCode": 200,
+"body": "Hello, AWS Lambda!"
+}
+
+EXPECTED RESULT:
+The function executes successfully and returns the expected output.
+
+---
+
+STEP 6: MONITOR THE FUNCTION
+
+WHERE TO EXECUTE:
+AWS Lambda and Amazon CloudWatch in the browser.
+
+1. Open the Monitor tab of the Lambda function.
+2. View invocation and error metrics.
+3. Open the CloudWatch logs.
+4. Inspect the execution logs for information or errors.
+
+EXPECTED RESULT:
+The available monitoring metrics and execution logs can be inspected.
+
+NOTE:
+CloudWatch logs may take a short time to appear after execution.
+
+---
+
+STEP 7: EXPLORE AWS SERVICE INTEGRATION
+
+WHERE TO EXECUTE:
+AWS Management Console in the browser.
+
+1. Open the Lambda function configuration.
+2. Explore integration with Amazon API Gateway to invoke the function through an HTTP endpoint.
+3. Alternatively, explore Amazon S3 or Amazon EventBridge as event sources.
+4. Configure a trigger only if required for the practical.
+
+EXPECTED RESULT:
+The available options for triggering a Lambda function through other AWS services are understood.
+
+NOTE:
+Creating the function does not automatically configure these integrations.
+
+---
+
+THEORY
+
+AWS Lambda is a serverless computing service provided by Amazon Web Services (AWS). It executes code without requiring users to manage servers. AWS Lambda automatically scales execution according to incoming requests.
+
+KEY CONCEPTS
+
+1. Code Unit:
+   The Python script or program uploaded to Lambda for execution.
+
+2. Event Source:
+   An event or AWS service that triggers the Lambda function, such as Amazon S3 or Amazon EventBridge.
+
+3. Execution Role:
+   An IAM role that grants the Lambda function permission to access required AWS resources.
+
+4. Runtime:
+   The execution environment used to run the function, such as Python, Java, or Node.js.
+
+5. Concurrency:
+   The number of function executions running simultaneously.
+
+6. Event:
+   The input data passed to the Lambda function.
+
+7. Context:
+   Provides information about the current execution environment and invocation.
+
+8. Amazon CloudWatch:
+   Used to monitor Lambda metrics and inspect execution logs.
+
+USES OF AWS LAMBDA
+
+* Data processing.
+* Backend processing for web applications.
+* Scheduled tasks.
+* File processing and transformation.
+* Automating cloud operations and security tasks.
+
+WORKING OF AWS LAMBDA
+
+1. A user creates and deploys a function.
+2. An event or test invocation triggers the function.
+3. AWS Lambda executes the code in its runtime environment.
+4. The function returns a result.
+5. Amazon CloudWatch can record execution logs and monitoring metrics.
+
+In this experiment, a Python function is created in AWS Lambda, deployed, executed using a test event, and verified through its execution result.
+
+---
+
+CONCLUSION
+
+AWS Lambda was used to create and execute a serverless function using Python. The function was deployed, tested using a test event, and its output was verified. The monitoring capabilities of Amazon CloudWatch and the integration options available for connecting Lambda with other AWS services were explored.
