@@ -1,0 +1,302 @@
+EXPERIMENT 7: MONITORING USING GRAFANA
+
+AIM
+
+To install and configure Grafana, create a monitoring dashboard, visualize system metrics using panels, configure alerts, and save or share the dashboard.
+
+---
+
+PROCEDURE
+
+1. Download and install Grafana on Windows using the MSI installer.
+2. Start the Grafana service and open Grafana in a web browser.
+3. Log in using the default credentials and update the password.
+4. Add and configure a suitable data source.
+5. Create a new dashboard and add visualization panels.
+6. Configure graphs, gauges, tables, labels, and refresh intervals.
+7. Configure alert rules with suitable conditions and notification settings.
+8. Save the dashboard and use the available sharing options.
+
+---
+
+STEPS AND COMMANDS
+
+STEP 1: DOWNLOAD GRAFANA
+
+WHERE TO EXECUTE:
+Google Chrome or any web browser.
+
+1. Open Google Chrome.
+2. Visit the official Grafana download website:
+
+https://grafana.com/grafana/download
+
+3. Select the Windows version.
+4. Download the Windows MSI installer.
+5. Wait until the download is completed.
+
+EXPECTED RESULT:
+The Grafana MSI installer is downloaded successfully.
+
+---
+
+STEP 2: INSTALL GRAFANA
+
+WHERE TO EXECUTE:
+Windows File Explorer.
+
+1. Open the Downloads folder.
+2. Locate the downloaded Grafana MSI installer.
+3. Double-click the installer.
+4. Follow the installation wizard.
+5. Accept the required options and click Install.
+6. Wait for the installation to complete.
+7. Close the installer.
+
+EXPECTED RESULT:
+Grafana is installed successfully on Windows.
+
+---
+
+STEP 3: START THE GRAFANA SERVICE
+
+WHERE TO EXECUTE:
+Windows Command Prompt (CMD) opened as Administrator.
+
+1. Open the Windows Start menu.
+2. Search for Command Prompt.
+3. Right-click Command Prompt.
+4. Select Run as administrator.
+5. Execute the following command:
+
+net start Grafana
+
+EXPECTED RESULT:
+The Grafana service starts successfully.
+
+NOTE:
+If the service is already running, Windows may report that it has already been started.
+
+If the service name is not recognized, open the Windows Services application by executing the following command in the Run dialog (Win + R):
+
+services.msc
+
+Locate the Grafana service and start it if it is stopped.
+
+---
+
+STEP 4: OPEN GRAFANA IN THE BROWSER
+
+WHERE TO EXECUTE:
+Google Chrome or any web browser.
+
+1. Open Google Chrome.
+2. Enter the following address in the address bar:
+
+http://localhost:3000
+
+3. Press Enter.
+4. The Grafana login page should appear.
+5. Enter the default credentials:
+
+Username: admin
+Password: admin
+
+6. Click Log In.
+7. If prompted, change the default password and save the new password.
+
+EXPECTED RESULT:
+The Grafana home page opens successfully.
+
+NOTE:
+If the page does not load, verify that the Grafana service is running and try again.
+
+---
+
+STEP 5: ADD A DATA SOURCE
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Log in to Grafana.
+2. Open Connections or Data sources from the left-side menu. The exact menu label may vary by version.
+3. Click Add new data source.
+4. Select a suitable data source, such as Prometheus.
+5. Enter the required connection details.
+6. Click Save & test.
+
+EXPECTED RESULT:
+Grafana displays a successful connection message if the data source is configured correctly.
+
+IMPORTANT NOTE:
+Prometheus must be installed and running separately before Grafana can retrieve metrics from it. If Prometheus is not available, the data-source connection will not succeed.
+
+Grafana visualizes data from connected sources; it does not automatically collect all system metrics by itself.
+
+---
+
+STEP 6: CREATE A NEW DASHBOARD
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Open the Grafana home page.
+2. Click + Create.
+3. Select Dashboard.
+4. Click Add visualization or Add new panel, depending on the Grafana version.
+5. Select the configured data source.
+6. Configure a query to retrieve the required metrics.
+7. Select a visualization type.
+8. Click Apply to add the panel to the dashboard.
+
+EXPECTED RESULT:
+A new dashboard containing a visualization panel is created.
+
+NOTE:
+The panel will display actual metric data only when the selected data source contains suitable data and the query is valid.
+
+---
+
+STEP 7: CONFIGURE VISUALIZATION PANELS
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Open the dashboard created in Step 6.
+2. Edit the required panel.
+3. Select a visualization type, such as:
+
+Graph or Time series
+Gauge
+Table
+Bar chart
+
+4. Configure the query according to the selected data source.
+5. Add a suitable panel title.
+6. Adjust labels, axes, units, and thresholds as required.
+7. Click Apply.
+
+EXPECTED RESULT:
+The dashboard displays the configured visualization panels.
+
+---
+
+STEP 8: CONFIGURE DASHBOARD SETTINGS
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Open the dashboard.
+2. Configure the dashboard time range.
+3. Set a suitable automatic refresh interval, if required.
+4. Rearrange the panels by dragging them.
+5. Resize the panels for better visibility.
+6. Save the dashboard using the Save dashboard option.
+7. Enter a suitable dashboard name and confirm the save operation.
+
+EXPECTED RESULT:
+The dashboard is saved with the selected panels and settings.
+
+---
+
+STEP 9: CONFIGURE ALERT RULES
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Open Alerting from the left-side menu.
+2. Select Alert rules.
+3. Click New alert rule.
+4. Enter an appropriate alert name.
+5. Select a suitable data source and configure a query.
+6. Define the alert condition.
+
+Example condition:
+
+CPU usage greater than 80%
+
+7. Configure the evaluation settings.
+8. Select or configure a notification contact point, such as email, Slack, or a webhook.
+9. Save the alert rule.
+
+EXPECTED RESULT:
+The alert rule is created and can evaluate the configured condition when the required data and notification settings are available.
+
+NOTE:
+A CPU alert requires a suitable metric source and query. Merely entering the condition does not automatically make Grafana collect CPU usage.
+
+---
+
+STEP 10: SAVE AND SHARE THE DASHBOARD
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+1. Open the completed dashboard.
+2. Click Save dashboard.
+3. Confirm that the dashboard is saved.
+4. Open the Share option.
+5. Copy the dashboard link or use the available export options.
+
+EXPECTED RESULT:
+The dashboard is saved and its sharing or export options are available.
+
+NOTE:
+Other users may require appropriate permissions to access the shared dashboard.
+
+---
+
+STEP 11: FINAL VERIFICATION
+
+WHERE TO EXECUTE:
+Grafana web interface in Google Chrome.
+
+Verify the following:
+
+1. Grafana opens successfully at http://localhost:3000.
+2. Login is successful.
+3. A suitable data source is configured.
+4. A dashboard has been created.
+5. Visualization panels have been added.
+6. Dashboard settings and refresh intervals are configured.
+7. An alert rule has been created.
+8. The dashboard has been saved.
+9. Sharing or export options are available.
+
+EXPECTED RESULT:
+Grafana is installed and configured, and the dashboard is ready to visualize available monitoring data.
+
+---
+
+THEORY
+
+Grafana is an open-source monitoring and analytics platform used to visualize time-series data through interactive dashboards.
+
+Data Source:
+A data source provides the data that Grafana queries and displays. Examples include Prometheus, InfluxDB, and Elasticsearch.
+
+Dashboard:
+A dashboard is a collection of panels used to display monitoring information in one place.
+
+Panel:
+A panel is an individual visualization, such as a graph, gauge, or table.
+
+Visualization:
+Visualization converts collected data into a graphical or tabular representation that is easier to understand.
+
+Alerting:
+Alerting allows users to define conditions and receive notifications when those conditions are met.
+
+Refresh Interval:
+The refresh interval determines how frequently Grafana updates dashboard data.
+
+Monitoring:
+Monitoring helps administrators observe system performance, resource utilization, and application health.
+
+Grafana is commonly used to monitor CPU usage, memory consumption, network traffic, server uptime, and application performance. It can integrate with monitoring systems such as Prometheus to display collected metrics and generate alerts.
+
+---
+
+CONCLUSION
+
+Grafana was installed and configured successfully. A data source was configured, a monitoring dashboard was created, and visualization panels were added. Dashboard settings and alert rules were configured, and the dashboard was saved with options to share or export it.
