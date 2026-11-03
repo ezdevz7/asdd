@@ -1,0 +1,447 @@
+EXPERIMENT 6: CONTAINERIZATION USING DOCKER
+
+AIM
+
+To containerize and run the TraceX application using Docker by cloning the GitHub repository, building a Docker image, running the application inside a Docker container, and accessing it through a web browser.
+
+---
+
+## PROCEDURE
+
+1. Install Git and Docker Desktop on Windows.
+2. Start Docker Desktop and verify that the Docker engine is running.
+3. Clone the TraceX project repository from GitHub.
+4. Navigate to the project directory and verify that the Dockerfile is present.
+5. Build a Docker image for the TraceX application.
+6. Run the application inside a Docker container and map port 3000.
+7. Verify the running container using Docker commands and Docker Desktop.
+8. Open the application in a web browser using localhost.
+9. Stop and remove the container after completing the experiment.
+
+---
+
+## STEPS AND COMMANDS
+
+STEP 1: VERIFY THE PREREQUISITES
+
+WHERE TO EXECUTE:
+Windows PowerShell or Command Prompt.
+
+1. Install Git and Docker Desktop if they are not already installed.
+2. Start Docker Desktop from the Windows Start menu.
+3. Wait until Docker Desktop indicates that the Docker engine is running.
+4. Open PowerShell.
+5. Execute the following commands individually.
+
+Check Git installation:
+
+git --version
+
+Check Docker installation:
+
+docker --version
+
+Check whether the Docker engine is running:
+
+docker info
+
+EXPECTED OUTPUT:
+
+1. The Git version should be displayed.
+2. The Docker version should be displayed.
+3. The Docker information should appear without a connection error.
+
+NOTE:
+
+If Docker reports that it cannot connect to the Docker daemon, start Docker Desktop and wait for the engine to become ready before continuing.
+
+---
+
+STEP 2: CLONE THE TRACEX GITHUB REPOSITORY
+
+WHERE TO EXECUTE:
+Windows PowerShell or Command Prompt.
+
+1. Navigate to the directory where you want to store the project.
+
+For example, to navigate to the Desktop:
+
+cd $HOME\Desktop
+
+2. Clone the TraceX GitHub repository:
+
+git clone https://github.com/Anupam-codes7/TraceX.git
+
+3. Wait until Git finishes downloading the repository.
+
+4. Navigate into the project directory:
+
+cd TraceX
+
+5. Display the project files:
+
+dir
+
+EXPECTED OUTPUT:
+
+The TraceX project files and folders should be displayed.
+
+The directory should contain a Dockerfile if the repository is already configured for Docker.
+
+NOTE:
+
+If the repository has already been cloned, navigate to the existing TraceX directory instead of cloning it again.
+
+---
+
+STEP 3: VERIFY THE DOCKERFILE AND PROJECT FILES
+
+WHERE TO EXECUTE:
+PowerShell, inside the TraceX project directory.
+
+1. Check the current directory:
+
+pwd
+
+2. Display the project files:
+
+dir
+
+3. Verify that the Dockerfile exists:
+
+Test-Path .\Dockerfile
+
+EXPECTED OUTPUT:
+
+The command should return:
+
+True
+
+4. Display the Dockerfile contents:
+
+Get-Content .\Dockerfile
+
+5. Read the Dockerfile and verify that it contains the instructions required to build the application image.
+
+EXPECTED RESULT:
+
+The project directory should contain a Dockerfile that describes how to build the TraceX application image.
+
+NOTE:
+
+If the Dockerfile is missing, do not proceed with the build command. Check the repository and the practical instructions provided by your ma'am.
+
+---
+
+STEP 4: BUILD THE DOCKER IMAGE
+
+WHERE TO EXECUTE:
+PowerShell, inside the TraceX project directory.
+
+1. Ensure Docker Desktop is running.
+
+2. Build the Docker image using the Dockerfile:
+
+docker build -t tracex .
+
+EXPLANATION:
+
+docker build:
+Builds a Docker image.
+
+-t tracex:
+Assigns the image the name tracex.
+
+.:
+Specifies the current directory as the build context.
+
+3. Wait for Docker to complete the build process.
+
+4. Verify that the image has been created:
+
+docker images
+
+EXPECTED OUTPUT:
+
+The Docker images list should contain an image named tracex.
+
+NOTE:
+
+If the build fails, read the error message and verify the Dockerfile, project files, dependencies, and Docker Desktop status.
+
+---
+
+STEP 5: RUN THE APPLICATION INSIDE A DOCKER CONTAINER
+
+WHERE TO EXECUTE:
+PowerShell.
+
+1. Run the TraceX application in a container:
+
+docker run -d --name tracex-app -p 3000:3000 tracex
+
+EXPLANATION:
+
+docker run:
+Creates and starts a container from a Docker image.
+
+-d:
+Runs the container in the background.
+
+--name tracex-app:
+Assigns the container the name tracex-app.
+
+-p 3000:3000:
+Maps port 3000 on the host computer to port 3000 inside the container.
+
+tracex:
+Specifies the Docker image used to create the container.
+
+2. Verify that the container is running:
+
+docker ps
+
+3. Display all containers, including stopped containers:
+
+docker ps -a
+
+EXPECTED OUTPUT:
+
+The tracex-app container should appear in the container list.
+
+Its status should show that it is running.
+
+NOTE:
+
+The application must listen on port 3000 inside the container for this port mapping to work.
+
+If the application uses a different internal port, follow the port specified in the project's Dockerfile and application configuration.
+
+---
+
+STEP 6: CHECK THE CONTAINER LOGS
+
+WHERE TO EXECUTE:
+PowerShell.
+
+1. Display the application container logs:
+
+docker logs tracex-app
+
+2. To follow the logs continuously:
+
+docker logs -f tracex-app
+
+3. Press Ctrl+C to stop following the logs.
+
+NOTE:
+
+Pressing Ctrl+C while following logs normally stops the log display without stopping the detached container.
+
+EXPECTED OUTPUT:
+
+The logs should help you verify whether the application started successfully.
+
+If the container exits unexpectedly, inspect its logs to identify the error.
+
+You can also check the container status using:
+
+docker ps -a
+
+---
+
+STEP 7: ACCESS THE APPLICATION THROUGH A WEB BROWSER
+
+WHERE TO EXECUTE:
+First, use PowerShell to verify the container. Then use Google Chrome or another web browser.
+
+1. In PowerShell, execute:
+
+docker ps
+
+2. Confirm that the tracex-app container is running.
+
+3. Open Google Chrome.
+
+4. Enter the following address in the browser address bar:
+
+http://localhost:3000
+
+5. Press Enter.
+
+EXPECTED OUTPUT:
+
+The TraceX application should open in the browser if it starts correctly and listens on the mapped port.
+
+This verifies that the application is accessible from the host computer through Docker's port mapping.
+
+IF THE APPLICATION DOES NOT OPEN:
+
+Return to PowerShell and execute:
+
+docker ps -a
+
+Check the application logs:
+
+docker logs tracex-app
+
+Verify the container's port mapping:
+
+docker port tracex-app
+
+Ensure that Docker Desktop is running and that the application is listening on the expected internal port.
+
+NOTE:
+
+The correct browser address depends on the application's configured port. This experiment assumes that TraceX listens on port 3000 inside the container.
+
+---
+
+STEP 8: VERIFY THE CONTAINER USING DOCKER DESKTOP
+
+WHERE TO EXECUTE:
+Docker Desktop graphical interface.
+
+1. Open Docker Desktop from the Windows Start menu.
+
+2. Navigate to the Containers section.
+
+3. Locate the container named:
+
+tracex-app
+
+4. Verify that its status is Running.
+
+5. Click the container to inspect its details.
+
+6. Check the following information:
+
+   a. Container name: tracex-app
+   b. Image name: tracex
+   c. Port mapping: 3000:3000
+   d. Container logs
+   e. Container status
+
+7. If available, use the displayed port link to open the application in your browser.
+
+EXPECTED OUTPUT:
+
+Docker Desktop should display the running TraceX container and its relevant details.
+
+This confirms that Docker is managing the application inside a container.
+
+---
+
+STEP 9: VERIFY THE DOCKER IMAGE AND CONTAINER
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Execute the following commands individually.
+
+Check the available Docker images:
+
+docker images
+
+Check the running containers:
+
+docker ps
+
+Check all containers:
+
+docker ps -a
+
+Check the application logs:
+
+docker logs tracex-app
+
+Check the port mapping:
+
+docker port tracex-app
+
+EXPECTED RESULTS:
+
+1. The tracex Docker image exists.
+2. The tracex-app container has been created.
+3. The container is running.
+4. The application logs do not show an unresolved startup error.
+5. Port 3000 is mapped correctly.
+6. The TraceX application is accessible through the browser.
+
+---
+
+STEP 10: STOP AND REMOVE THE CONTAINER (OPTIONAL)
+
+WHERE TO EXECUTE:
+PowerShell.
+
+Perform these commands only after completing the experiment and taking the required screenshots.
+
+1. Stop the running container:
+
+docker stop tracex-app
+
+2. Remove the container:
+
+docker rm tracex-app
+
+3. Verify that the container has been removed:
+
+docker ps -a
+
+EXPECTED OUTPUT:
+
+The tracex-app container should no longer appear in the list of containers.
+
+NOTE:
+
+Removing the container does not automatically delete the Docker image.
+
+The image can be used again to create another container.
+
+If you want to remove the image as well, execute:
+
+docker rmi tracex
+
+Only remove the image if you no longer need it.
+
+---
+
+## THEORY
+
+Docker is an open-source platform used to package applications and their dependencies into containers. Containers provide a consistent environment for running applications across different systems.
+
+Git:
+Git is a version control system used to manage source code and track changes.
+
+GitHub:
+GitHub is a platform for hosting Git repositories and collaborating on software projects.
+
+Docker Desktop:
+Docker Desktop provides a graphical interface and the tools required to build, run, and manage Docker containers on Windows.
+
+Dockerfile:
+A Dockerfile contains instructions for building a Docker image. It specifies the base image, application files, dependencies, configuration, and startup command.
+
+Docker Image:
+A Docker image is a packaged, read-only template used to create containers.
+
+Docker Container:
+A container is a running instance of a Docker image. It provides an isolated environment in which an application executes.
+
+Docker Build:
+The docker build command creates an image using the Dockerfile and the specified build context.
+
+Port Mapping:
+Port mapping connects a port on the host computer to a port inside the container. In this experiment, 3000:3000 maps host port 3000 to container port 3000.
+
+Docker Logs:
+Docker logs displays the output produced by a container, helping identify startup messages and errors.
+
+In this experiment, the TraceX source code is downloaded from GitHub, a Docker image is built using the project's Dockerfile, and a container is created from that image. Port mapping allows the application to be accessed through a web browser.
+
+---
+
+## CONCLUSION
+
+The TraceX project was cloned from GitHub, and a Docker image was built using the project's Dockerfile. The application was run inside a Docker container, and port mapping was configured to provide browser access. The container, image, logs, and port mapping were verified using Docker commands and Docker Desktop.
